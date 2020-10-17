@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Passanger App</string>
+
+    <string-array name="session_name">
+
+
+        <item>Select</item>
+        <item>Office Package</item>
+        <item>School Package</item>
+        <item>University Package</item>
+        <item>Summer Package</item>
+        <item>Daily Worker Package</item>
+
+    </string-array>
+</resources>

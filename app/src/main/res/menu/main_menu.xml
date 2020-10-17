@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+
+<item android:id="@+id/nav_home"
+    android:title="Recharge Token"
+
+    android:icon="@drawable/nav_orders"
+    />
+
+    <item android:id="@+id/nav_cato"
+        android:title="My Token"
+        android:icon="@drawable/username"
+        />
+
+    <item android:id="@+id/nav_search"
+        android:title="Session Request"
+        android:icon="@drawable/username"
+        />
+    <item android:id="@+id/nav_skillz"
+        android:title="Trip History"
+        android:icon="@drawable/nav_orders"
+        />
+</group>
+
+    <item android:title="">
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+
+
+                <item android:id="@+id/nav_signout"
+                    android:title="Signout"
+                    android:icon="@drawable/nav_signout"
+                    />
+            </group>
+
+
+        </menu>
+    </item>
+
+
+
+</menu>
