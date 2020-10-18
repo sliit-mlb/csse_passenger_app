@@ -128,7 +128,10 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
                 myToken.putExtra("amount",balance);
                 startActivity(myToken);
                 break;
-                case R.id.nav_skillz:startActivity(new Intent(getApplicationContext(),TipHistory.class));
+                case R.id.nav_skillz:
+                    Intent tripHistory = new Intent(getApplicationContext(), TipHistory.class);
+                    tripHistory.putExtra("pid",pid);
+                    startActivity(tripHistory);
                 break;
             case R.id.nav_signout:
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
