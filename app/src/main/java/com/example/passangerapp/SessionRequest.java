@@ -10,23 +10,20 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class SessionRequest extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
-    ImageView imageView;
-    Spinner sp1;
-    EditText ed;
-    Button b;
-    DatabaseReference mDatabase;
-    SessionRequestData sessionRequestData;
-    long maxid=0;
+public class SessionRequest extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private ImageView imageView;
+    private Spinner sp1;
+    private EditText ed;
+    private Button b;
+    private DatabaseReference mDatabase;
+    private SessionRequestData sessionRequestData;
+    private long maxid = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,23 +36,6 @@ public class SessionRequest extends AppCompatActivity implements AdapterView.OnI
         b = findViewById(R.id.sessionsend);
         sessionRequestData = new SessionRequestData();
 
-
-        /*reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-
-                    maxid = (snapshot.getChildrenCount());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
-
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,33 +43,23 @@ public class SessionRequest extends AppCompatActivity implements AdapterView.OnI
                 String ses = sp1.getSelectedItem().toString();
                 String desc = ed.getText().toString();
 
-                if(desc.equals("")){
+                if (desc.equals("")) {
                     Toast.makeText(SessionRequest.this, "Please Fill Feilds To Continue..!", Toast.LENGTH_SHORT).show();
-
-
-                }else if(ses.equals("Select")){
-
+                } else if (ses.equals("Select")) {
                     Toast.makeText(SessionRequest.this, "Please Select Session Name..!", Toast.LENGTH_SHORT).show();
-
-                }else{
+                } else {
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Session");
 
                     sessionRequestData = new SessionRequestData();
-
                     sessionRequestData.setSessionname(ses);
                     sessionRequestData.setSessdescription(desc);
 
                     mDatabase.push().setValue(sessionRequestData);
                     Toast.makeText(SessionRequest.this, "Data Saved Saucess", Toast.LENGTH_SHORT).show();
                     ed.setText("");
-
-
                 }
-
-
             }
         });
-
     }
 
     @Override

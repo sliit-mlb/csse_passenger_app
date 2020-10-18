@@ -1,6 +1,5 @@
 package com.example.passangerapp;
 
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,12 +18,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class RechargeToken extends AppCompatActivity {
-    EditText ed,ed1,ed2,ed3;
-    Button b;
-    DatabaseReference mDatabase;
-    //SessionRequestData sessionRequestData;
-    //PassengerData passengerData;
-    long maxid=0;
+    private EditText ed, ed1, ed2, ed3;
+    private Button b;
+    private DatabaseReference mDatabase;
+
+    long maxid = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,38 +38,21 @@ public class RechargeToken extends AppCompatActivity {
         ed2 = findViewById(R.id.ed2);
         ed3 = findViewById(R.id.ed3);
 
-        /*reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-
-                    maxid = (snapshot.getChildrenCount());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
         b = findViewById(R.id.rechargebtn);
-        //passengerData = new PassengerData();
+
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cardno =ed1.getText().toString();
-                String expdate =ed2.getText().toString();
-                String ccv =ed3.getText().toString();
+                String cardno = ed1.getText().toString();
+                String expdate = ed2.getText().toString();
+                String ccv = ed3.getText().toString();
                 final String amount = ed.getText().toString();
-                if(cardno.equals("") || expdate.equals("") || ccv.equals("") || amount.equals("")){
+                if (cardno.equals("") || expdate.equals("") || ccv.equals("") || amount.equals("")) {
                     Toast.makeText(RechargeToken.this, "Please Fill Feilds To Continue..!", Toast.LENGTH_SHORT).show();
-
-
-                }else{
+                } else {
                     String id = extras.getString("pid");
 
-                    Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Passanger");
 
@@ -79,9 +61,9 @@ public class RechargeToken extends AppCompatActivity {
                     checkInspector.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()){
-                                String pid=null,amt = null;
-                                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                            if (dataSnapshot.exists()) {
+                                String pid = null, amt = null;
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                     pid = ds.child("pid").getValue(String.class);
                                     amt = ds.child("amount").getValue(String.class);
                                 }
@@ -100,23 +82,13 @@ public class RechargeToken extends AppCompatActivity {
                         }
                     });
 
-                    //passengerData.setPid("");
-                    //passengerData.setPemail("");
-                    //passengerData.setPname("");
-                    //passengerData.setPphone("");
-                    //passengerData.setPassword("");
-                    //passengerData.setAmount(amount);
-                    //reff.push().setValue(passengerData);
                     Toast.makeText(RechargeToken.this, "Recharged Successfully!!!", Toast.LENGTH_SHORT).show();
                     ed.setText("");
                     ed1.setText("");
                     ed2.setText("");
                     ed3.setText("");
-
                 }
             }
         });
-
-
     }
 }

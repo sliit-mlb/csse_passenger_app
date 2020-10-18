@@ -13,8 +13,8 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class MyToken extends AppCompatActivity {
 
-    ImageView qrView;
-    TextView amountView;
+    private ImageView qrView;
+    private TextView amountView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +30,12 @@ public class MyToken extends AppCompatActivity {
         amountView.setText(extras.getString("amount"));
         String pid = extras.getString("pid");
 
-        if(!pid.equals("")){
-            QRGEncoder qrgEncoder = new QRGEncoder(pid, null, QRGContents.Type.TEXT,500);
+        if (!pid.equals("")) {
+            QRGEncoder qrgEncoder = new QRGEncoder(pid, null, QRGContents.Type.TEXT, 500);
             try {
                 Bitmap qrBits = qrgEncoder.getBitmap();
                 qrView.setImageBitmap(qrBits);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
